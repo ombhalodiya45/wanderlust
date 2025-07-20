@@ -1,0 +1,39 @@
+<% layout("/layouts/boilerplate") %>
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+            <h3>Create a new listing</h3>
+            <br>
+            <form action="/listings" method="post">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" placeholder="Add a catchy title" name="listing[title]" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea placeholder="Special about the venue" name="listing[description]"
+                        class="form-control"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label" >Image Link</label>
+                    <input type="text" placeholder="(jpeg, png, etc)" name="listing[image]" class="form-control">
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" placeholder="price/night" name="listing[price]" class="form-control">
+                    </div>
+                    <div class="mb-3 col-md-8">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" placeholder="Venue country" name="listing[country]" class="form-control">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" placeholder="Venue location " name="listing[location]" class="form-control">
+                </div>
+                <button class="btn btn-dark add-btn mt-3">Add</button>
+            </form>
+            <br>
+        </div>
+    </div>
