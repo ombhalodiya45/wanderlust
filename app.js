@@ -9,7 +9,8 @@ const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const { listingSchema } = require("./schema.js");
-    
+const Review = require("./models/review.js")
+
 const MONGO_URL = "mongodb://127.0.0.1:27017/Wanderlust";
 
 
@@ -37,6 +38,16 @@ app.get("/", (req, res) => {
     res.send("root is working");
 });
 
+const validateListing = (req, res, next) => {
+    let { error } = listingSchema.validate(req.body);
+    if (error) {
+        let errMsg = error.details.map((el) => el.message).join(",");
+        throw new ExpressError(400, errMsg);
+    } else {
+        next();
+    }
+}
+
 //index route
 app.get("/listings", async (req, res) => {
     const allListings = await Listing.find();
@@ -56,17 +67,11 @@ app.get("/listings/:id", async (req, res) => {
 });
 
 //create route
-app.post("/listings", wrapAsync(async (req, res, next) => {
+app.post("/listings", validateListing, wrapAsync(async (req, res, next) => {
 
     const defaultUrl = "https://plus.unsplash.com/premium_photo-1749903201646-09435fb2b384?q=80&w=1166&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
     const listingData = req.body.listing;
-
-    let result = listingSchema.validate(req.body);
-    console.log(result);
-    if(result.error){
-        throw new ExpressError(400,result.error);
-    }
     // If image is a string (user sent just a URL), convert it to object
     if (typeof listingData.image === "string") {
         listingData.image = {
@@ -98,14 +103,12 @@ app.get("/listings/:id/edit", async (req, res) => {
 });
 
 //update route
-app.put("/listings/:id", wrapAsync(async (req, res) => {
-    if (!req.body.listing) {
-        throw next(new ExpressError(404, "Page Not Found!"));
-    }
-    let { id } = req.params;
-    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
-    res.redirect("/listings");  
-}))
+app.put("/listings/:id", validateListing,
+    wrapAsync(async (req, res) => {
+        let { id } = req.params;
+        await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+        res.redirect("/listings");
+    }))
 
 //delete route
 app.delete("/listings/:id", async (req, res) => {
@@ -113,6 +116,21 @@ app.delete("/listings/:id", async (req, res) => {
     let deleteListing = await Listing.findByIdAndDelete(id);
     res.redirect("/listings");
 })
+
+//Reviews 
+//Post route
+app.post("/listings/:id/reviews", async (req, res) => {
+    let listing = await Listing.findById(req.params.id);
+    let newReview = new Review(req.body.review);
+
+    listing.reviews.push(newReview);
+
+    await newReview.save();
+    await listing.save();
+
+    console.log("new review saved");
+    res.redirect(`/listings/${listing._id}`);
+});
 
 //error handling
 app.use((req, res, next) => {

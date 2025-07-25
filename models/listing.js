@@ -20,25 +20,30 @@ const listingSchema = new Schema({
   ,
   price: Number,
   location: {
-  type: String,
-  required: true,
-  validate: {
-    validator: function (v) {
-      return /^[A-Za-z\s]+$/.test(v);  // allows only letters and spaces
+    type: String,
+    required: true,
+    validate: {
+      validator: function (v) {
+        return /^[A-Za-z\s]+$/.test(v);  // allows only letters and spaces
+      },
+      message: props => `"${props.value}" is not valid. Only letters and spaces are allowed in location.`,
     },
-    message: props => `"${props.value}" is not valid. Only letters and spaces are allowed in location.`,
   },
-},
-country: {
-  type: String,
-  required: true,
-  validate: {
-    validator: function (v) {
-      return /^[A-Za-z\s]+$/.test(v);  // allows only letters and spaces
+  country: {
+    type: String,
+    required: true,
+    validate: {
+      validator: function (v) {
+        return /^[A-Za-z\s]+$/.test(v);  // allows only letters and spaces
+      },
+      message: props => `"${props.value}" is not valid. Only letters and spaces are allowed in country.`,
     },
-    message: props => `"${props.value}" is not valid. Only letters and spaces are allowed in country.`,
   },
-},
+  reviews: [{
+    type: Schema.Types.ObjectId,
+    ref: "Review",
+  },
+  ],
 });
 
 const Listing = mongoose.model("Listing", listingSchema);
