@@ -44,8 +44,12 @@ module.exports.createListing = async (req, res, next) => {
     if (!req.body.listing) {
         throw next(new ExpressError(404, "Page Not Found!"));
     }
+    let url = req.file.path;
+    let filename = req.file.filename;
+    
     const newListing = new Listing(listingData);
     newListing.owner = req.user._id;
+    newListing.image = {url , filename};
     await newListing.save();
     req.flash("success", "New Listing Created!");
     return res.redirect("/listings");
