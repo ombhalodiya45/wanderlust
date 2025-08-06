@@ -17,8 +17,7 @@ const listingSchema = new Schema({
           ? v
           : "https://plus.unsplash.com/premium_photo-1749903201646-09435fb2b384?q=80&w=1166&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     }
-  }
-  ,
+  },
   price: Number,
   location: {
     type: String,
@@ -40,23 +39,24 @@ const listingSchema = new Schema({
       message: props => `"${props.value}" is not valid. Only letters and spaces are allowed in country.`,
     },
   },
+  lat: { type: Number, default: 0 },
+  lng: { type: Number, default: 0 },
   reviews: [{
     type: Schema.Types.ObjectId,
     ref: "Review",
-  },
-  ],
+  }],
   owner: {
     type: Schema.Types.ObjectId,
     ref: "User",
   },
 });
 
+// Middleware to delete associated reviews when listing is deleted
 listingSchema.post("findOneAndDelete", async (listing) => {
   if (listing) {
     await Review.deleteMany({ _id: { $in: listing.reviews } });
   }
-
-})
+});
 
 const Listing = mongoose.model("Listing", listingSchema);
 module.exports = Listing;
