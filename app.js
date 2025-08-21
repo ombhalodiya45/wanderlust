@@ -53,9 +53,6 @@ const sessionOptions = {
     },
 }
 
-app.get("/", (req, res) => {
-    res.send("root is working");
-});
 
 app.use(session(sessionOptions));
 app.use(flash());

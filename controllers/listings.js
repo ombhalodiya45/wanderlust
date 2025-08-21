@@ -37,7 +37,7 @@ module.exports.createListing = async (req, res, next) => {
 
     const geoData = geoRes.data;
 
-    if (geoData.length > 0) {   
+    if (geoData.length > 0) {
         listingData.lat = geoData[0].lat;
         listingData.lng = geoData[0].lon;
     }
@@ -85,22 +85,30 @@ module.exports.updateListing = async (req, res) => {
 
     const geoRes = await axios.get(
         `https://nominatim.openstreetmap.org/search`,
-        { params: { q: `${listingData.location},${listingData.country}`, format: "json", limit: 1 } }
+        { params: { q: `${updatedData.location},${updatedData.country}`, format: "json", limit: 1 } }
     );
 
     const geoData = geoRes.data;
 
-    if (geoData.length > 0) {   
-        listingData.lat = geoData[0].lat;
-        listingData.lng = geoData[0].lon;
+    let listing = await Listing.findById(id);
+
+    if (!listing) {
+        req.flash("error", "Listing not found!");
+        return res.redirect("/listings");
     }
 
-    let listing = await Listing.findByIdAndUpdate(id, updatedData, { new: true });
+    if (geoData.length > 0) {
+        updatedData.lat = geoData[0].lat;
+        updatedData.lng = geoData[0].lon;
+    }
+
+    listing.set(updatedData);
 
     if (req.file) {
         listing.image = { url: req.file.path, filename: req.file.filename };
-        await listing.save();
+        
     }
+    await listing.save();
 
     req.flash("success", "Listing Updated!");
     res.redirect(`/listings/${id}`);

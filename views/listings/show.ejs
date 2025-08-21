@@ -11,6 +11,7 @@
             <p class="card-text">&#x20B9;<%= listing.price.toLocaleString("en-IN") %></p>
             <p class="card-text"><%= listing.location %></p>
             <p class="card-text"><%= listing.country %></p>
+             <p class="card-text">Category: <b><%= listing.category %></b></p>
         </div>
     </div>
 </div>
@@ -73,7 +74,7 @@
 </div>
 <!-- Map Section -->
 <div class="col-8 offset-3 mt-4">
-    <h4>Location Map</h4>
+    <h4>Where you will'Be</h4>
     <% if (listing.lat && listing.lng) { %>
         <div id="map" 
             data-lat="<%= listing.lat %>" 

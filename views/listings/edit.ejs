@@ -48,6 +48,23 @@
                     <input type="text" value="<%= listing.location %>" name="listing[location]" class="form-control"
                         required>
                 </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select name="listing[category]" class="form-select" required>
+                        <option value="" disabled>Select a category</option>
+                        <option value="Villa" <%=listing.category==="Villa" ? "selected" : "" %>>Villa</option>
+                        <option value="Trending" <%=listing.category==="Trending" ? "selected" : "" %>>Trending</option>
+                        <option value="Hotels" <%=listing.category==="Hotels" ? "selected" : "" %>>Hotels</option>
+                        <option value="Iconic cities" <%=listing.category==="Iconic cities" ? "selected" : "" %>>Iconic
+                            cities</option>
+                        <option value="Mountains" <%=listing.category==="Mountains" ? "selected" : "" %>>Mountains
+                        </option>
+                        <option value="Beaches" <%=listing.category==="Beaches" ? "selected" : "" %>>Beaches</option>
+                        <option value="Camping" <%=listing.category==="Camping" ? "selected" : "" %>>Camping</option>
+                    </select>
+                    <div class="invalid-feedback">Please select a category</div>
+                </div>
+
                 <button class="btn btn-dark edit-btn mt-3">Edit</button>
                 <br><br>
             </form>
