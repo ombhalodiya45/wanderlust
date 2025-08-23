@@ -52,7 +52,7 @@ const listingSchema = new Schema({
   },
   category:{
     type:String,
-    enum:["Villa","Trending","Hotels","Iconic cities","Mountains","Beaches","Camping"],
+    enum:["Villa","Trending","Hotels","Cities","Mountains","Beaches","Camping"],
     required:true
   },
 });

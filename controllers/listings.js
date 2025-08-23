@@ -3,7 +3,6 @@ const axios = require("axios");
 
 module.exports.index = async (req, res) => {
     const allListings = await Listing.find();
-    req.flash("success", "New Listing Created!");
     res.render("listings/index.ejs", { allListings });
 };
 

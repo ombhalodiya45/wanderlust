@@ -257,7 +257,7 @@ const sampleListings = [
     price: 5000,
     location: "Dubai",
     country: "United Arab Emirates",
-    category: "Iconic cities",
+    category: "Cities",
   },
   {
     title: "Rustic Log Cabin in Montana",
@@ -322,7 +322,7 @@ const sampleListings = [
     price: 2000,
     location: "Tokyo",
     country: "Japan",
-    category: "Iconic cities",
+    category: "Cities",
   },
   {
     title: "Lakefront Cabin in New Hampshire",
