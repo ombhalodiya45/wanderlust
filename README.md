@@ -3,6 +3,7 @@
 A full-stack travel accommodation and destination platform that allows users to explore, filter, and manage listings of villas, hotels, cities, mountains, beaches, and more.
 Wanderlust delivers a seamless experience with category-based filtering, responsive UI, and map integration.
 
+
 📑 Table of Contents
 
 Overview
@@ -21,9 +22,13 @@ Examples
 
 Troubleshooting
 
+
+
 📝 Overview
 
 Wanderlust is designed with a clean, responsive UI using Bootstrap and structured backend following MVC architecture. Users can browse listings, filter by categories, and view location maps integrated with Leaflet.js and OpenStreetMap.
+
+
 
 ✨ Features
 
@@ -43,12 +48,16 @@ Wanderlust is designed with a clean, responsive UI using Bootstrap and structure
 
 🔐 Authentication – Secure login & signup system for personalized features.
 
+
+
 🛠️ Tech Stack
 
 Frontend: HTML, CSS, Bootstrap, EJS
 Backend: Node.js, Express.js
 Database: MongoDB, Mongoose ORM
 Other Tools: Git/GitHub, FontAwesome
+
+
 
 🚀 Installation
 
@@ -79,6 +88,8 @@ cd wanderlust
     "passport-local-mongoose": "^8.0.0"
 }
 
+
+
 ⚙️ Configuration
 
 Create a .env file in the project root with the following variables:
@@ -86,6 +97,8 @@ Create a .env file in the project root with the following variables:
 PORT=3000
 MONGO_URI=your_mongodb_connection_string
 SESSION_SECRET=your_secret_key
+
+
 
 📖 Usage
 
@@ -97,6 +110,8 @@ View details including images, price, and embedded map location.
 
 Log in or sign up to personalize your experience.
 
+
+
 🌟 Examples
 
 A user searches for "beach" → displays all beach listings with photos, prices, and map.
@@ -104,6 +119,8 @@ A user searches for "beach" → displays all beach listings with photos, prices,
 A user selects "Trending" → shows top popular destinations dynamically from DB.
 
 Responsive grid adapts across desktop, tablet, and mobile.
+
+
 
 🛠️ Troubleshooting
 
