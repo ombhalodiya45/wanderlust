@@ -1,60 +1,74 @@
 <% layout("/layouts/boilerplate") %>
-    <style>
-        #fillters {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-        }
 
-        .fillter {
-            text-align: center;
-            margin-right: 2rem;
-            margin-top: 2rem;
-            opacity: 0.7;
-        }
+<style>
+    /* Filters Section */
+    #filters {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
 
-        .fillter:hover {
-            opacity: 1;
-            cursor: pointer;
-        }
-        .btn-primary{
-            background-color: #fe424d;
-            border: none;
-            text-decoration: none;
-        }
-    </style>
-    <div id="fillters">
-        <div class="fillter">
-            <div><i class="fa-solid fa-house"></i></div>
-            <p>Villa</p>
-        </div>
-        <div class="fillter">
-            <div><i class="fa-solid fa-fire"></i></div>
-            <p>Trending</p>
-        </div>
-        <div class="fillter">
-            <div><i class="fa-solid fa-bed"></i></div>
-            <p>Hotels</p>
-        </div>
-        <div class="fillter">
-            <div><i class="fa-solid fa-mountain-city"></i></div>
-            <p>Cities</p>
-        </div>
-        <div class="fillter">
-            <div><i class="fa-solid fa-mountain"></i></div>
-            <p>Mountains</p>
-        </div>
-        <div class="fillter">
-            <div><i class="fa-solid fa-person-swimming"></i></div>
-            <p>Beaches</p>
-        </div>
+    .filter {
+        text-align: center;
+        margin: 1rem 2rem 0 0;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+    }
 
-        <div class="fillter">
-            <div><i class="fa-solid fa-campground"></i></div>
-            <p>Camping</p>
-        </div>
-        
+    .filter:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    /* Buttons */
+    .btn-primary {
+        background-color: #fe424d;
+        border: none;
+        text-decoration: none;
+    }
+
+    /* Card */
+    .card-detail img {
+        height: 20rem;
+        object-fit: cover;
+        border-radius: 0.5rem;
+    }
+</style>
+
+<!-- Filters -->
+<div id="filters">
+    <div class="filter">
+        <div><i class="fa-solid fa-house"></i></div>
+        <p>Villa</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-fire"></i></div>
+        <p>Trending</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-bed"></i></div>
+        <p>Hotels</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-mountain-city"></i></div>
+        <p>Cities</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-mountain"></i></div>
+        <p>Mountains</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
+        <p>Beaches</p>
+    </div>
+    <div class="filter">
+        <div><i class="fa-solid fa-campground"></i></div>
+        <p>Camping</p>
+    </div>
+</div>
+
 <!-- Category Heading -->
 <h2 class="text-center mt-4">Showing <%= category %> Listings</h2>
 
@@ -69,10 +83,9 @@
     <% listings.forEach(listing => { %>
         <div class="col mb-4">
             <div class="card h-100 border-0 card-detail">
-                <img src="<%= listing.image.url %>"  style="height: 20rem;" class="card-img-top" alt="<%= listing.title %> " >
+                <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.title %>">
                 <div class="card-body">
                     <h5 class="card-title"><%= listing.title %></h5>
-                    
                     <p class="card-text"><strong>₹<%= listing.price %></strong></p>
                     <a href="/listings/<%= listing._id %>" class="btn btn-primary">View Details</a>
                 </div>

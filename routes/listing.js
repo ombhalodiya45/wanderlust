@@ -18,6 +18,25 @@ router.route("/")
 //new route
 router.get("/new", isLoggedIn, listingController.renderNewForm);
 
+router.get("/search", async (req, res) => {
+    try {
+        const query = req.query.q?.trim(); // get and trim text
+        if (!query) {
+        return res.redirect("/listings"); // if empty, go back
+        }
+
+        // Search listings where title matches query (case-insensitive)
+        const listings = await Listing.find({
+        title: { $regex: query, $options: "i" }
+        });
+
+        res.render("listings/index.ejs", { allListings: listings, searchQuery: query });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Server Error");
+    }
+    });
+
 router.route("/:id")
     .get(wrapAsync(listingController.showListing))
     .put(isLoggedIn, isOwner, upload.single('listing[image]'), validateListing, wrapAsync(listingController.updateListing))
@@ -25,6 +44,8 @@ router.route("/:id")
 
 //edit route
 router.get("/:id/edit", isLoggedIn, isOwner, listingController.renderEditForm);
+
+    
 
 // ✅ Villa category route (add this **before module.exports**)
 router.get("/category/villa", wrapAsync(async (req, res) => {

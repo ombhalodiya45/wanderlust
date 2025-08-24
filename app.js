@@ -19,21 +19,18 @@ const listingRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/Wanderlust";
-
 
 main()
-    .then((res) => {
-        console.log("connected to db");
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+  .then(() => console.log("Connected to DB"))
+  .catch(err => console.error("DB connection error:", err));
 
 async function main() {
-    await mongoose.connect(MONGO_URL);
-
+  await mongoose.connect(process.env.ATLASDB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 }
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));

@@ -1,14 +1,16 @@
 <style>
-  .search-btn{
+  .search-btn {
     background-color: #fe424d;
     color: #fff;
     border-radius: 100px;
   }
-  .search-btn:hover{
+
+  .search-btn:hover {
     background-color: #fe424d;
     color: #fff;
   }
-  .search-inp{
+
+  .search-inp {
     border-radius: 25px;
     padding: 0.5rem 5rem o.5rem 5rem;
   }
@@ -25,8 +27,8 @@
         <a class="nav-link" href="/listings">Explore</a>
       </div>
       <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2 search-inp" type="search" placeholder="See where to go"/>
+        <form class="d-flex needs-validation" novalidate role="search" action="/listings/search" method="GET">
+          <input class="form-control me-2 search-inp" type="search" name="q" placeholder="See where to go" required />
           <button class="btn search-btn" type="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
       </div>

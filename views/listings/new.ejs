@@ -14,7 +14,8 @@
                 </div>
                 <% } %>
                     <br>
-                    <form action="/listings" method="post" novalidate class="needs-validation" enctype="multipart/form-data">
+                    <form action="/listings" method="post" novalidate class="needs-validation"
+                        enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
                             <input type="text" placeholder="Add a catchy title" name="listing[title]"
@@ -30,8 +31,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">Upload Listing Image</label>
-                            <input type="file" name="listing[image]"
-                                class="form-control">
+                            <input type="file" name="listing[image]" class="form-control">
                             <div class="valid-feedback">Picture looks awesome !</div>
                         </div>
                         <div class="row">
