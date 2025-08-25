@@ -11,10 +11,15 @@ const upload = multer({ storage });
 
 const listingController = require("../controllers/listings.js");
 
-router.route("/")
+router.get("/", (req, res) => {
+  res.redirect("/listings");
+});
+
+router.route("/listings")
     .get(wrapAsync(listingController.index))
     .post(validateListing, isLoggedIn, upload.single('listing[image]'), wrapAsync(listingController.createListing),
     );
+
 //new route
 router.get("/new", isLoggedIn, listingController.renderNewForm);
 
