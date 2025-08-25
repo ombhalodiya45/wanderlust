@@ -63,7 +63,7 @@ Other Tools: Git/GitHub, FontAwesome
 
 Clone the repository:
 
-git clone 
+git clone https://github.com/ombhalodiya45/wanderlust.git
 cd wanderlust
 
 "dependencies": {
