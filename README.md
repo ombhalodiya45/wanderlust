@@ -2,6 +2,10 @@
 
 A full-stack travel accommodation and destination platform that allows users to explore, filter, and manage listings of villas, hotels, cities, mountains, beaches, and more. Wanderlust delivers a seamless experience with category-based filtering, responsive UI, and map integration.
 
+## 🌐 Demo
+
+Check out the live demo: 👉(https://wanderlust-64j5.onrender.com)
+
 ---
 
 ## 🚀 Installation
